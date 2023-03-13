@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="cal"></div>
+    <script>
+        /*
+        Напишите функцию createCalendar(elem, year, month).
+        Вызов функции должен создать календарь для заданного месяца month в году year и вставить его в elem.
+        Календарь должен быть таблицей, где неделя – это <tr>, а день – это <td>. У таблицы должен быть заголовок с названиями дней недели, 
+        каждый день – <th>, первым днём недели должен быть понедельник.
+        Например, createCalendar(cal, 2012, 9) сгенерирует в cal следующий календарь:
+        */
+
+        const createCalendar = (elem, year, month) => {
+            const table = document.createElement('table');
+            let firstDay = new Date(year, month - 1);
+            let lastDay = new Date(year, month, 0);
+            const weeks = [];
+            let week = new Array(7).fill(' ');
+            for (let i = firstDay.getDate(); i <= lastDay.getDate(); i += 1) {
+                let date = new Date(year, month - 1, i);
+
+                let dayOftheWeek = date.getDay() - 1 === -1 ? 6 : date.getDay() - 1;
+                week[dayOftheWeek] = date.getDate();
+
+                if (dayOftheWeek === 6 || i === lastDay.getDate()) {
+                    let tr = document.createElement('tr');
+                    week.map((day) => {
+                        let td = document.createElement('td');
+                        td.innerText = day;
+                        tr.append(td);
+                    })
+                    weeks.push(tr);
+                    week = new Array(7).fill(' ');
+                }
+            }
+            const daysOfTheWeek = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс']
+            daysOfTheWeek.map((day) => {
+                const th = document.createElement('th');
+                th.innerText = day;
+                table.append(th);
+            });
+            weeks.forEach((week) => table.append(week));
+            elem.append(table);
+        };
+
+        const cal = document.getElementById('cal')
+        createCalendar(cal, 2012, 9)
+    </script>
+</body>
+
+</html>

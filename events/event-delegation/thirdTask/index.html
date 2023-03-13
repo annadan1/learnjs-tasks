@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <table id="grid">
+        <thead>
+            <tr>
+                <th data-type="number">Возраст</th>
+                <th data-type="string">Имя</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>5</td>
+                <td>Вася</td>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td>Петя</td>
+            </tr>
+            <tr>
+                <td>9</td>
+                <td>Маша</td>
+            </tr>
+            <tr>
+                <td>12</td>
+                <td>Женя</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Аня</td>
+            </tr>
+            <tr>
+                <td>15</td>
+                <td>Андрей</td>
+            </tr>
+        </tbody>
+    </table>
+    <script>
+        const table = document.querySelector('#grid');
+
+        table.addEventListener('click', e => {
+            if (e.target.tagName != 'TH') return;
+            const action = e.target.dataset.type;
+            const tbody = document.querySelector('tbody');
+            const sortedRows = Array.from(tbody.rows);
+
+            if (action === 'number') {
+                sortedRows.sort((prewRow, nextRow) => prewRow.children[0].textContent - nextRow.children[0].textContent);
+            }
+            if (action === 'string') {
+                sortedRows.sort((prewRow, nextRow) => prewRow.children[1].textContent > nextRow.children[1].textContent ? 1 : -1);
+            }
+            tbody.append(...sortedRows);
+        });
+    </script>
+</body>
+
+</html>

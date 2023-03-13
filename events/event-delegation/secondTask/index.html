@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <ul class="tree" id="tree">
+        <li>Животные
+            <ul>
+                <li>Млекопитающие
+                    <ul>
+                        <li>Коровы</li>
+                        <li>Ослы</li>
+                        <li>Собаки</li>
+                        <li>Тигры</li>
+                    </ul>
+                </li>
+                <li>Другие
+                    <ul>
+                        <li>Змеи</li>
+                        <li>Птицы</li>
+                        <li>Ящерицы</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li>Рыбы
+            <ul>
+                <li>Аквариумные
+                    <ul>
+                        <li>Гуппи</li>
+                        <li>Скалярии</li>
+                    </ul>
+                </li>
+                <li>Морские
+                    <ul>
+                        <li>Морская форель</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+
+    <script>
+        const tree = document.querySelector('.tree');
+        const listLi = document.querySelectorAll('li');
+        listLi.forEach((li) => {
+            const span = document.createElement('span');
+            li.prepend(span);
+            span.append(span.nextSibling);
+        });
+        tree.addEventListener('click', e => {
+            if (event.target.tagName != 'SPAN') {
+                return;
+            }
+            const currentLi = e.target.closest('li');
+            const lists = currentLi.querySelector('ul');
+            if (!lists) return;
+            lists.classList.toggle("hidden");
+        })
+    </script>
+</body>
+
+</html>

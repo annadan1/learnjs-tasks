@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- Создайте «Карусель» –- ленту изображений, которую можно листать влево-вправо нажатием на стрелочки. -->
+    <div class="container">
+        <button class="arrow prev">⇦</button>
+        <ul class="carousel">
+            <li><img src="https://ru.js.cx/carousel/1.png"></li>
+            <li><img src="https://ru.js.cx/carousel/2.png"></li>
+            <li><img src="https://ru.js.cx/carousel/3.png"></li>
+            <li><img src="https://ru.js.cx/carousel/4.png"></li>
+            <li><img src="https://ru.js.cx/carousel/5.png"></li>
+            <li><img src="https://ru.js.cx/carousel/6.png"></li>
+            <li><img src="https://ru.js.cx/carousel/7.png"></li>
+            <li><img src="https://ru.js.cx/carousel/8.png"></li>
+            <li><img src="https://ru.js.cx/carousel/9.png"></li>
+            <li><img src="https://ru.js.cx/carousel/10.png"></li>
+        </ul>
+        <button class="arrow next">⇨</button>
+    </div>
+    <script>
+        let listLi = document.querySelectorAll('li');
+        const carousel = document.querySelector('.carousel');
+
+        const buttonPrev = document.querySelector('.prev');
+        const buttonNext = document.querySelector('.next');
+        
+        const updateListLi = () => {
+            listLi = document.querySelectorAll('li');
+        }
+
+        buttonPrev.addEventListener('click', () => {
+            carousel.prepend(listLi[listLi.length - 1]);
+            updateListLi();
+        });
+
+        buttonNext.addEventListener('click', () => {
+            carousel.append(listLi[0]);
+            updateListLi();
+        });
+
+    </script>
+</body>
+
+</html>

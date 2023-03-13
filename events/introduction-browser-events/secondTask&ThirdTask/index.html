@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button type="button" onclick="this.hidden=true">Нажмите, чтобы спрятать</button>
+    <button type="button" class="button">Кнопка третьего задания</button>
+</body>
+<script>
+    //В переменной button находится кнопка.Изначально на ней нет обработчиков.
+    //Который из обработчиков запустится ? Что будет выведено при клике после выполнения кода ?
+    const button = document.querySelector('.button');
+
+    button.addEventListener("click", () => alert("1")); // сработает
+
+    button.removeEventListener("click", () => alert("1"));
+
+    button.onclick = () => alert(2); // сработает
+
+    //будет выведено 1 потом 2
+    //т.к. removeEventListener не удалил наш обработчик, для удаления нужно передавать ссылку на функцию
+</script>
+
+</html>

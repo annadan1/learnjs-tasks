@@ -1,0 +1,14 @@
+.hours {
+  color: red;
+}
+.minutes {
+  color: green;
+}
+.seconds {
+  color: blue;
+}
+
+.clock {
+  display: flex;
+  align-items: center;
+}

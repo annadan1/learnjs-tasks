@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <p>ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя</p>
+    <p>ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя</p>
+
+    <button data-tooltip="эта подсказка должна быть длиннее, чем элемент">Короткая кнопка</button>
+    <button data-tooltip="HTML<br>подсказка">Ещё кнопка</button>
+
+    <p>Прокрутите страницу, чтобы кнопки оказались у верхнего края, а затем проверьте правильно ли выводятся подсказки.
+    </p>
+
+    <script>
+        const body = document.querySelector('body');
+        let tooltip = null;
+
+        const addTooltip = (e) => {
+            const html = e.target.dataset.tooltip;
+            if (!html) return;
+            const elem = e.target;
+            const coordsElem = elem.getBoundingClientRect();
+            tooltip = document.createElement('div');
+            tooltip.className = 'tooltip';
+            tooltip.innerHTML = html;
+            body.append(tooltip);
+
+            let left = coordsElem.left + (elem.offsetWidth - tooltip.offsetWidth) / 2;
+            if (left < 0) left = 0;
+            let top = coordsElem.top - tooltip.offsetHeight - 5;
+            if (top < 0) {
+                top = coordsElem.top + elem.offsetHeight + 5;
+            }
+            tooltip.style.left = left + 'px';
+            tooltip.style.top = top + 'px';
+        };
+
+        const removeTooltip = () => {
+            if (tooltip) {
+                tooltip.remove();
+                tooltipElem = null;
+            }
+        };
+
+        body.addEventListener('mouseover', e => addTooltip(e));
+        body.addEventListener('mouseout', removeTooltip)
+    </script>
+</body>
+
+</html>

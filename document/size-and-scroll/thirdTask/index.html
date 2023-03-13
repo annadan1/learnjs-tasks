@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="field">
+        <img src="https://en.js.cx/clipart/ball.svg" id="ball"> . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . .
+    </div>
+    <script>
+        const ball = document.getElementById('ball');
+        const field = document.getElementById('field');
+
+        const fieldWidth = field.clientWidth;
+        const fieldHeigth = field.clientHeight;
+        const ballWidth = ball.offsetWidth === 0 ? 20 : ball.offsetWidth / 2;
+        const ballHeigth = ball.offsetHeight === 0 ? 20 : ball.offsetHeight / 2;
+
+        ball.style.left = `${fieldWidth / 2 - ballHeigth}px`;
+        ball.style.top = `${fieldHeigth / 2 - ballHeigth}px`;
+    </script>
+</body>
+
+</html>

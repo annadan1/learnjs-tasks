@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+
+<body>
+    Нажмите на поле для перемещения мяча.
+    <br> Мяч не должен выходить за границы поля.
+
+
+    <div id="field">
+        <img src="https://ru.js.cx/clipart/ball.svg" id="ball"> . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . .
+    </div>
+    <script>
+        const field = document.getElementById('field');
+        const ball = document.getElementById('ball');
+        const ballHeigth = ball.offsetHeight || 40;
+        const ballWidth = ball.offsetWidth || 40;
+        const borderSize = field.clientLeft;
+        const coords = field.getBoundingClientRect();
+
+        field.addEventListener('click', e => {
+            let newY = e.clientY - coords.top - field.clientTop - (ballHeigth / 2);
+            let newX = e.clientX - coords.left - field.clientLeft - (ballHeigth / 2)
+            if (newY < 0) {
+                newY = 0;
+            }
+            if ((e.clientY + (ballHeigth / 2)) > (coords.bottom - borderSize)) {
+                let different = (ballHeigth / 2) + (e.clientY - (coords.bottom - borderSize));
+                newY -= different;
+            }
+            if (newX < 0) {
+                newX = 0;
+            }
+            if ((e.clientX + (ballHeigth / 2)) > (coords.right - borderSize)) {
+                let different = (ballHeigth / 2) + (e.clientX - (coords.right - borderSize));
+                newX -= different;;
+            }
+            ball.style.top = newY + 'px';
+            ball.style.left = newX + 'px';
+        })
+
+    </script>
+</body>
+
+</html>

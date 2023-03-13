@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container"></div>
+    <script>
+        //Создайте цветные часы:
+        const getElemP = (attr, content) => {
+            const p = document.createElement('p');
+            p.className = attr;
+            p.innerText = content;
+            return p;
+        }
+
+        let timerId;
+
+        const container = document.querySelector('.container');
+        const clock = document.createElement('div');
+        clock.className = 'clock';
+        clock.append(getElemP('hours', 'hh'), ':', getElemP('minutes', 'mm'), ':', getElemP('seconds', 'ss'));
+        container.append(clock);
+
+        const updateClock = (date) => {
+            clock.innerText = '';
+            let hours = date.getHours().toString().padStart(2, 0);
+            let minutes = date.getMinutes().toString().padStart(2, 0);
+            let seconds = date.getSeconds().toString().padStart(2, 0);
+            clock.append(getElemP('hours', hours), ':', getElemP('minutes', minutes), ':', getElemP('seconds', seconds));
+            container.prepend(clock);
+        };
+
+        const buttonStart = document.createElement('button');
+        buttonStart.setAttribute('type', 'button');
+        buttonStart.className = 'start';
+        buttonStart.textContent = 'start';
+        buttonStart.addEventListener('click', () => {
+            updateClock(new Date());
+            timerId = setInterval(() => updateClock(new Date()), 1000);
+        });
+        const buttonStop = document.createElement('button');
+        buttonStop.className = 'stop';
+        buttonStop.textContent = 'stop';
+        buttonStop.addEventListener('click', () => {
+            clearInterval(timerId);
+        });
+        container.append(buttonStart);
+        container.append(buttonStop);
+
+    </script>
+</body>
+
+</html>
