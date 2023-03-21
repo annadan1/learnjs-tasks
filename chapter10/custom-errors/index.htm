@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    /*
+Создайте класс FormatError, который наследует от встроенного класса SyntaxError.
+Класс должен поддерживать свойства message, name и stack.
+*/
+    class FormatError extends SyntaxError {
+      constructor(err) {
+        super(err);
+        this.name = 'FormatError';
+      }
+    }
+
+    let err = new FormatError("ошибка форматирования");
+
+    alert(err.message); // ошибка форматирования
+    alert(err.name); // FormatError
+    alert(err.stack); // stack
+
+    alert(err instanceof FormatError); // true
+    alert(err instanceof SyntaxError);
+  </script>
+</body>
+
+</html>
